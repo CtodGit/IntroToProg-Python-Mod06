@@ -7,7 +7,11 @@
 # ChangeLog (Who,When,What):
 # RRoot,1.1.2030,Created started script
 # RRoot,1.1.2030,Added code to complete assignment 5
-# CTodhunter,5.25.2020,Modified code to complete assignment 6
+# CTodhunter,5.25.2020, completed function code in processor class
+# Ctodhunter,8.25.2020, completed function code in IO class
+# CTodhunter,5.25.2020, completed code in main
+# CTodhunter,5.25.2020, ran and checked program
+# CTodhunter,5.25.2020, commented code
 # ---------------------------------------------------------------------------- #
 
 # Data ---------------------------------------------------------------------- #
@@ -45,18 +49,19 @@ class Processor:
 
     @staticmethod
     def add_data_to_list(task, priority, list_of_rows):
-        # TODO: Add Code Here!
 
+        # created and populating dictionary row from user input
         dicRow = {"Task": task.strip(), "Priority": priority.strip()}
+
+        # adding dicRow to list
         list_of_rows.append(dicRow)
 
         return list_of_rows, 'Success'
 
     @staticmethod
     def remove_data_from_list(task, list_of_rows):
-        # TODO: Add Code Here!
 
-        # stepping through list_of_rows to see if strRemove present, and removing if so
+        # stepping through list_of_rows to see if task present, and removing if so
         for row in list_of_rows:
             if task.lower() == row['Task'].lower():
                 list_of_rows.remove(row)
@@ -67,10 +72,10 @@ class Processor:
 
     @staticmethod
     def write_data_to_file(file_name, list_of_rows):
-        # TODO: Add Code Here!
+        #creating objFile
         objFile = open(strFile, 'w')
 
-        # writting data to strFile that fit's my format for reading the file above
+        # writting data to file via for iterable
         for row in list_of_rows:
             objFile.write(row['Task'] + ',' + row['Priority'] + '\n')
 
@@ -141,7 +146,6 @@ class IO:
     @staticmethod
     def input_new_task_and_priority():
 
-        # TODO: Add Code Here!
         # grabbing user input for task name and priority level
         task = input('Type the task you would like to add: ')
         priority = input('Type the associated priority level you would like [1 = 10]: ')
@@ -151,7 +155,7 @@ class IO:
 
     @staticmethod
     def input_task_to_remove():
-        # TODO: Add Code Here!
+
         # grabbing task that user wants to delete
         strTskRemove = input('Type a task name to remove it please: ')
 
@@ -173,19 +177,22 @@ while(True):
     
     # Step 4 - Process user's menu choice
     if strChoice.strip() == '1':  # Add a new Task
-        # TODO: Add Code Here
+
+        # unpacking tuple from function
         strTask, strPriority = IO.input_new_task_and_priority()
 
+        # processing unpacked tuple data and adding to list
         Processor.add_data_to_list(strTask, strPriority, lstTable)
 
         IO.input_press_to_continue(strStatus)
         continue  # to show the menu
 
     elif strChoice == '2':  # Remove an existing Task
-        # TODO: Add Code Here
 
+        # assigning strTskRemove to return from input function
         strTskRemove = IO.input_task_to_remove()
-        print(strTskRemove)
+
+        # processing via remove data from list function and strRemove, lstTable
         Processor.remove_data_from_list(strTskRemove, lstTable)
 
         IO.input_press_to_continue(strStatus)
@@ -194,7 +201,8 @@ while(True):
     elif strChoice == '3':   # Save Data to File
         strChoice = IO.input_yes_no_choice("Save this data to file? (y/n) - ")
         if strChoice.lower() == "y":
-            # TODO: Add Code Here!
+
+            # calling processor to write to strFile bia lstTable (list of dictionary rows)
             Processor.write_data_to_file(strFile, lstTable)
             print('Current data has been written to file!')
 
@@ -208,7 +216,8 @@ while(True):
         print("Warning: Unsaved Data Will Be Lost!")
         strChoice = IO.input_yes_no_choice("Are you sure you want to reload data from file? (y/n) -  ")
         if strChoice.lower() == 'y':
-            # TODO: Add Code Here!
+
+            # there was todo code here but I didn't see a need
             IO.input_press_to_continue(strStatus)
         else:
             IO.input_press_to_continue("File Reload  Cancelled!")
