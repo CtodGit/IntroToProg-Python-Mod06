@@ -1,0 +1,3 @@
+mow lawn,2
+drink,4
+say hi,2
